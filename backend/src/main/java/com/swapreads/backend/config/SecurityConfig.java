@@ -29,10 +29,17 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .sessionManagement(session -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+//                .authorizeHttpRequests(auth -> auth
+//                        .requestMatchers("/api/auth/**").permitAll()
+//                        .requestMatchers(HttpMethod.GET, "/api/books").permitAll()
+//                        .requestMatchers(HttpMethod.GET, "/api/books/**").permitAll()
+//                        .anyRequest().authenticated()
+//                )
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/auth/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/books").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/books/**").permitAll()
+                        .requestMatchers("/api/exchange/**").authenticated()
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(jwtAuthFilter,
